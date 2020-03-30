@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:3.5
 
 ARG NJOBS=4
 
