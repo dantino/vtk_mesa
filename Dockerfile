@@ -14,7 +14,7 @@ RUN apk add --no-cache \
 
 RUN wget -q https://mesa.freedesktop.org/archive/mesa-20.0.2.tar.xz  && \
     tar -xf mesa-20.0.2.tar.xz && \
-    cd mesa-20.0.2 && autoreconf -fi && \
+    cd mesa-20.0.2 && \
     ./configure CXXFLAGS="-O2 -g -DDEFAULT_SOFTWARE_DEPTH_BITS=31" CFLAGS="-O2 -g -DDEFAULT_SOFTWARE_DEPTH_BITS=31"--disable-xvmc --disable-dri --with-dri-drivers="" --with-gallium-drivers="swrast" --enable-texture-float --disable-egl --with-egl-platforms="" --enable-gallium-osmesa --enable-gallium-llvm=yes --with-llvm-shared-libs --prefix=/usr/ && \
     make -j $NJOBS &&  make install && \
     cd .. && rm -rf mesa-20.0.2 && rm mesa-20.0.2.tar.xz
