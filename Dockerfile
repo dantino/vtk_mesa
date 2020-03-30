@@ -21,6 +21,9 @@ RUN apk add --no-cache \
 #     make -j $NJOBS &&  make install && \
 #     cd .. && rm -rf mesa-20.0.2 && rm mesa-20.0.2.tar.xz
 
+ENV PYTHON_LIBRARY=/usr/lib/python3.8/config-3.8-x86_64-linux-gnu/libpython3.8.a
+ENV PYTHON_INCLUDE_DIR=/usr/include/python3.8
+
 # Download and extract VTK source, then configure and build VTK
 RUN wget -q https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz && \
     tar -xzf VTK-8.2.0.tar.gz && \
