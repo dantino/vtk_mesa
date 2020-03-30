@@ -4,6 +4,7 @@ ARG NJOBS=4
 
 # Install some Alpine packages
 RUN apk add --no-cache \
+    autoconf \
     bash \
     build-base \
     cmake \
