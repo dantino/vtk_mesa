@@ -15,7 +15,7 @@ RUN apk add --no-cache \
 # Download and extract VTK source, then configure and build VTK
 RUN wget -nv -O- https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz | \
     tar xz && \
-    cd VTK-8.2.0 && \
+    mkdir build && cd build \    
     cmake \
     -D CMAKE_BUILD_TYPE:STRING=Release \
     -D CMAKE_INSTALL_PREFIX:STRING=/usr \
@@ -33,10 +33,11 @@ RUN wget -nv -O- https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz | \
     -D VTK_Group_Rendering:BOOL=ON \
     -D VTK_WRAP_PYTHON=ON \
     -D VTK_PYTHON_VERSION:STRING=3 \
-    . && \
+    VTK-8.2.0 && \
     make -j $NJOBS && \
     make install && \
-    cd .. && rm -rf VTK-8.2.0
+    cd .. && \
+    rm -rf VTK-8.2.0 && rm -rf build
 
 # Install imagemagick (and possibly more later) to compare images
 RUN apk add --no-cache \
