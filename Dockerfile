@@ -32,6 +32,9 @@ RUN wget -q https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz && \
     -DOSMESA_LIBRARY=/usr/lib/libOSMesa.so.8 \
     -DOSMESA_INCLUDE_DIR=/usr/include/GL/ \
     -DVTK_OPENGL_HAS_OSMESA=ON -DVTK_USE_OFFSCREEN=ON \
+    -DVTK_Group_MPI:BOOL=OFF \
+    -DVTK_Group_StandAlone:BOOL=OFF \
+    -DVTK_Group_Rendering:BOOL=ON \
     -DOPENGL_gl_LIBRARY=/usr/lib/libglapi.so -DCMAKE_INSTALL_PREFIX=/usr/ ../VTK-8.2.0 && \
     make -j $NJOBS && \
     make install && \
