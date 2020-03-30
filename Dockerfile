@@ -14,12 +14,6 @@ RUN apk add --no-cache \
     mesa-dev \
     mesa-osmesa    
 
-# RUN wget -q https://mesa.freedesktop.org/archive/mesa-20.0.2.tar.xz  && \
-#     tar -xf mesa-20.0.2.tar.xz && \
-#     cd mesa-20.0.2 && \
-#     ./configure CXXFLAGS="-O2 -g -DDEFAULT_SOFTWARE_DEPTH_BITS=31" CFLAGS="-O2 -g -DDEFAULT_SOFTWARE_DEPTH_BITS=31"--disable-xvmc --disable-dri --with-dri-drivers="" --with-gallium-drivers="swrast" --enable-texture-float --disable-egl --with-egl-platforms="" --enable-gallium-osmesa --enable-gallium-llvm=yes --with-llvm-shared-libs --prefix=/usr/ && \
-#     make -j $NJOBS &&  make install && \
-#     cd .. && rm -rf mesa-20.0.2 && rm mesa-20.0.2.tar.xz
 
 ENV PYTHON_LIBRARY=/usr/lib/python3.8/config-3.8-x86_64-linux-gnu/libpython3.8.a
 ENV PYTHON_INCLUDE_DIR=/usr/include/python3.8
@@ -28,13 +22,16 @@ ENV PYTHON_INCLUDE_DIR=/usr/include/python3.8
 RUN wget -q https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz && \
     tar -xzf VTK-8.2.0.tar.gz && \
     mkdir build && cd build && \ 
-    cmake -DCMAKE_BUILD_TYPE=Release -DVTK_WRAP_PYTHON=ON -DVTK_USE_X=OFF -DBUILD_SHARED_LIBS=ON \
+    cmake -DCMAKE_BUILD_TYPE=Release -DVTK_USE_X=OFF -DBUILD_SHARED_LIBS=ON \
     -DOSMESA_LIBRARY=/usr/lib/libOSMesa.so.8 \
     -DOSMESA_INCLUDE_DIR=/usr/include/GL/ \
     -DVTK_OPENGL_HAS_OSMESA=ON -DVTK_USE_OFFSCREEN=ON \
     -DVTK_Group_MPI:BOOL=OFF \
     -DVTK_Group_StandAlone:BOOL=OFF \
     -DVTK_Group_Rendering:BOOL=ON \
+    -DVTK_MODULE_ENABLE_VTK_PythonInterpreter:BOOL=OFF \
+    -D VTK_WRAP_PYTHON=ON \
+    -D VTK_PYTHON_VERSION:STRING=3 \    
     -DOPENGL_gl_LIBRARY=/usr/lib/libglapi.so -DCMAKE_INSTALL_PREFIX=/usr/ ../VTK-8.2.0 && \
     make -j $NJOBS && \
     make install && \
