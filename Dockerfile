@@ -21,7 +21,7 @@ RUN wget https://mesa.freedesktop.org/archive/mesa-20.0.2.tar.xz  && \
 # Download and extract VTK source, then configure and build VTK
 RUN wget https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz && \
     tar -xzvf VTK-8.2.0.tar.gz && \
-    mkdir build && cd build && \    i
+    mkdir build && cd build && \ 
     cmake -DCMAKE_BUILD_TYPE=Release -DVTK_WRAP_PYTHON=ON -DVTK_USE_X=OFF -DBUILD_SHARED_LIBS=ON -DVTK_OPENGL_HAS_OSMESA=ON -DVTK_USE_OFFSCREEN=ON && \
     -DOPENGL_gl_LIBRARY=/usr/lib/libglapi.so -DOSMESA_INCLUDE_DIR=/usr/include/ -DOSMESA_LIBRARY=/usr/lib/libOSMesa.so -DCMAKE_INSTALL_PREFIX=/usr/ ../VTK-8.2.0 && \
     make -j $NJOBS && \
