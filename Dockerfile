@@ -9,7 +9,7 @@ RUN apk add --no-cache \
     cmake \
     wget \
     python3-dev \
-    xorg-dev
+    libx11-dev
 
 RUN wget https://mesa.freedesktop.org/archive/mesa-20.0.2.tar.xz  && \
     tar xzvf mesa-20.0.2.tar.xz && \
